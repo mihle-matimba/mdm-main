@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MDM Trading Academy – Courses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --glass-bg: rgba(15, 23, 42, .85);
+            --glass-border: rgba(255, 255, 255, .08);
+            --card-bg: rgba(15, 23, 42, .9);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            margin: 0;
+            overscroll-behavior: none
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+            border-radius: 12px
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .2)
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(59, 130, 246, .15) 0%, rgba(16, 185, 129, .10) 100%)
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all .3s ease;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        .nav-link:hover {
+            background: rgba(59, 130, 246, .1);
+            color: var(--primary-light)
+        }
+
+        .nav-link.active {
+            background: rgba(59, 130, 246, .2);
+            color: var(--primary-light)
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            bottom: 8px;
+            width: 24px;
+            height: 2px;
+            background: var(--primary-light)
+        }
+
+        .tool-card,
+        .course-card {
+            transition: transform .3s ease, box-shadow .3s ease
+        }
+
+        .tool-card:hover,
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .3)
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transition: all .3s ease
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, .3)
+        }
+
+        .notification-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse 2s infinite
+        }
+
+        .dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all .3s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0)
+        }
+
+        @media (max-width:768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform .3s ease
+            }
+
+            .sidebar.active {
+                transform: translateX(0)
+            }
+
+            .main-content {
+                margin-left: 0 !important
+            }
+
+            header.glass {
+                padding-left: 60px
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--glass-bg);
+            border-radius: 4px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+            transition: background .3s ease
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light)
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 var(--accent)
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0)
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0)
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn .4s ease-out forwards
+        }
+
+        .tool-shortcut {
+            transition: all .3s ease;
+            border: 1px solid transparent
+        }
+
+        .tool-shortcut:hover {
+            transform: translateY(-2px);
+            border-color: rgba(59, 130, 246, .3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, .2)
+        }
+
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg glass">
+        <i class="fas fa-bars text-lg"></i>
+    </button>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="sidebar glass fixed h-screen w-72 z-50 md:border-r border-gray-800 transition-transform duration-300">
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img src="https://static.wixstatic.com/media/ac771e_06be3915d5c14ef6943298aff7dad886~mv2.png"
+                        alt="MDM Logo" class="h-10">
+                    <span class="text-2xl font-bold tracking-tight">MDM Trading</span>
+                </div>
+
+                <nav class="flex-1">
+                    <ul class="space-y-2">
+                        <li>
+                            <a onclick="postMessage('nav-dashboard')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-chart-pie w-6 text-center"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="postMessage('nav-competitions')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-trophy w-6 text-center"></i>
+                                <span>Competitions</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="postMessage('nav-communities')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-users w-6 text-center"></i>
+                                <span>Communities</span>
+                            </a>
+                        </li>
+                        <!-- COURSES NAV -->
+                        <li>
+                            <a onclick="postMessage('nav-courses')" class="nav-link active flex items-center space-x-4">
+                                <i class="fas fa-book-open w-6 text-center text-primary-light"></i>
+                                <span>Courses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="postMessage('nav-calendar')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-calendar-alt w-6 text-center"></i>
+                                <span>Economic Calendar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="postMessage('nav-simulator')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-project-diagram w-6 text-center text-primary-light"></i>
+                                <span>Strategy Simulator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="postMessage('nav-tools')" class="nav-link flex items-center space-x-4">
+                                <i class="fas fa-tools w-6 text-center"></i>
+                                <span>Trading Tools</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content flex-1 min-h-screen ml-0 md:ml-72">
+            <header class="glass sticky top-0 z-40 border-b border-gray-800 pl-16 md:pl-6">
+                <div class="px-6 py-4 flex items-center justify-between">
+                    <h1 class="text-2xl font-semibold tracking-tight">Courses</h1>
+                    <button onclick="postMessage('signout')" id="sign-out-btn"
+                        class="btn-signout flex items-center space-x-2 text-red-400 py-2 px-4 rounded-lg">
+                        <i class="fas fa-sign-out-alt"></i><span>Sign Out</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="p-6 lg:p-8 space-y-8">
+                <!-- Hero / Intro -->
+                <section
+                    class="glass gradient-bg rounded-2xl p-6 lg:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 animate-fade-in">
+                    <div class="space-y-3 max-w-xl">
+                        <div
+                            class="inline-flex items-center gap-2 bg:white/5 border border-white/10 text-xs px-3 py-1 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>MDM Trading Academy</span>
+                        </div>
+                        <h2 class="text-2xl lg:text-3xl font-extrabold tracking-tight">
+                            Level up your trading with focused, no-fluff education.
+                        </h2>
+                        <p class="text-sm text-gray-300">
+                            Choose a course that matches your current level — from absolute beginner to precision
+                            execution with professional-level psychology.
+                        </p>
+                        <div class="flex flex-wrap gap-3 text-xs text-gray-300">
+                            <div class="inline-flex items-center gap-2">
+                                <i class="fas fa-signal text-primary-light"></i>
+                                Structured learning paths
+                            </div>
+                            <div class="inline-flex items-center gap-2">
+                                <i class="fas fa-clock text-emerald-400"></i>
+                                Self-paced lessons
+                            </div>
+                            <div class="inline-flex items-center gap-2">
+                                <i class="fas fa-check-circle text-amber-400"></i>
+                                Practical, trader-first content
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 flex flex-col gap-3 min-w-[220px]">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Total Courses</span>
+                            <span class="text-lg font-semibold">5</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Total Lessons</span>
+                            <span class="text-lg font-semibold">84</span>
+                        </div>
+                        <button onclick="document.getElementById('courses-grid').scrollIntoView({behavior:'smooth'})"
+                            class="btn-primary mt-2 w-full text-sm font-medium py-2 rounded-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-arrow-down"></i> Browse courses
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Courses Grid -->
+                <section id="courses-grid" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold">All Courses</h2>
+                        <span class="text-xs text-gray-400">Select a course to view full curriculum and join.</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                        <!-- MDM Beginners trading Course -->
+                        <article class="course-card glass-card rounded-2xl overflow-hidden flex flex-col">
+                            <div class="relative h-40 w-full overflow-hidden">
+                                <img src="https://static.wixstatic.com/media/ac771e_3fee01e284e24231b01c99d6ac5bf883~mv2.jpg"
+                                    alt="MDM Beginners Trading Course" class="h-full w-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
+                                </div>
+                                <div class="absolute bottom-3 left-3 flex items-center gap-2 text-xs">
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-user"></i> Chris Bredell
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-list-ol"></i> 13 lessons
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col gap-3">
+                                <h3 class="font-semibold text-lg">MDM Beginners Trading Course</h3>
+                                <p class="text-sm text-gray-300">
+                                    Start from absolute zero. Build a solid foundation in markets, charts, risk and
+                                    basic strategies the MDM way.
+                                </p>
+                                <div class="flex items-center justify-between text-xs text-gray-400 mt-1">
+                                    <span><i class="fas fa-seedling mr-1 text-emerald-400"></i>Beginner friendly</span>
+                                    <span><i class="fas fa-road mr-1"></i>Start here</span>
+                                </div>
+                                <a href="https://mdmtraders.com/mdm-beginners-trading-course" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-primary mt-3 w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                                    <i class="fas fa-door-open"></i> View Course
+                                </a>
+                            </div>
+                        </article>
+                        <!-- MDM Beginners trading Course -->
+                        <article class="course-card glass-card rounded-2xl overflow-hidden flex flex-col">
+                            <div class="relative h-40 w-full overflow-hidden">
+                                <img src="https://static.wixstatic.com/media/ac771e_5c547265f7984cdd9dd01b8eba40dd46~mv2.png"
+                                    alt="MDM Beginners Trading Course" class="h-full w-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
+                                </div>
+                                <div class="absolute bottom-3 left-3 flex items-center gap-2 text-xs">
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-user"></i> Dwayno 
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-list-ol"></i> 3 lessons
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col gap-3">
+                                <h3 class="font-semibold text-lg">Crown Gold</h3>
+                                <p class="text-sm text-gray-300">
+                                    Learn the strategy that crowned Dwayno as the king of Gold
+                                </p>
+                                <div class="flex items-center justify-between text-xs text-gray-400 mt-1">
+                                    <span><i class="fas fa-seedling mr-1 text-emerald-400"></i>Technical Analysis</span>
+                                    <span><i class="fas fa-road mr-1"></i>Advanced</span>
+                                </div>
+                                <a href="https://mdmtraders.com/crown-gold" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-primary mt-3 w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                                    <i class="fas fa-door-open"></i> View Course
+                                </a>
+                            </div>
+                        </article>
+                        <!-- Trading Psychology by Chris Bredell -->
+                        <article class="course-card glass-card rounded-2xl overflow-hidden flex flex-col">
+                            <div class="relative h-40 w-full overflow-hidden">
+                                <img src="https://static.wixstatic.com/media/ac771e_bf94b782f5604399a725cc6e66ac3658~mv2.png"
+                                    alt="Trading Psychology Course" class="h-full w-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
+                                </div>
+                                <div class="absolute bottom-3 left-3 flex items-center gap-2 text-xs">
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-user"></i> Chris Bredell
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-list-ol"></i> 6 lessons
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col gap-3">
+                                <h3 class="font-semibold text-lg">Trading Psychology</h3>
+                                <p class="text-sm text-gray-300">
+                                    Master your mindset, deal with fear and FOMO, and build the emotional discipline
+                                    that keeps you consistent through drawdowns.
+                                </p>
+                                <div class="flex items-center justify-between text-xs text-gray-400 mt-1">
+                                    <span><i class="fas fa-brain mr-1 text-emerald-400"></i>Psychology focused</span>
+                                    <span><i class="fas fa-star mr-1 text-amber-400"></i>Core module</span>
+                                </div>
+                                <a href="https://mdmtraders.com/trading-psychology" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-primary mt-3 w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                                    <i class="fas fa-door-open"></i> View Course
+                                </a>
+                            </div>
+                        </article>
+
+
+                        <!-- Precision Trading Mastery by Chris Bredell -->
+                        <article class="course-card glass-card rounded-2xl overflow-hidden flex flex-col">
+                            <div class="relative h-40 w-full overflow-hidden">
+                                <img src="https://static.wixstatic.com/media/ac771e_2cd63618834940588e29b2467ff61535~mv2.png"
+                                    alt="Precision Trading Mastery" class="h-full w-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
+                                </div>
+                                <div class="absolute bottom-3 left-3 flex items-center gap-2 text-xs">
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-user"></i> Chris Bredell
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 rounded-full bg-black/50 border border-white/10 flex items-center gap-1">
+                                        <i class="fas fa-list-ol"></i> 32 lessons
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-5 flex-1 flex flex-col gap-3">
+                                <h3 class="font-semibold text-lg">Precision Trading Mastery</h3>
+                                <p class="text-sm text-gray-300">
+                                    Advanced execution with laser-focused entries, refined risk management, and
+                                    precision-based playbooks for serious traders.
+                                </p>
+                                <div class="flex items-center justify-between text-xs text-gray-400 mt-1">
+                                    <span><i class="fas fa-bullseye mr-1 text-emerald-400"></i>Advanced</span>
+                                    <span><i class="fas fa-chart-line mr-1 text-primary-light"></i>Execution
+                                        focused</span>
+                                </div>
+                                <a href="https://mdmtraders.com/precision-trading-mastery" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-primary mt-3 w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                                    <i class="fas fa-door-open"></i> View Course
+                                </a>
+                            </div>
+                        </article>
+
+
+
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            mobileMenuBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar?.classList.toggle('active');
+            });
+            document.addEventListener('click', () => {
+                sidebar?.classList.remove('active');
+            });
+        });
+        function postMessage(message) { window.parent.postMessage(message, "*"); }
+    </script>
+</body>
+
+</html>
