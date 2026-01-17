@@ -1,1 +1,1215 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MDM Trading – Trading Course & Community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Learn proven trading strategies and grow with a private community of serious traders."
+  />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --bg-darker: #020314;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617, #020314 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section {
+      padding: 4rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 640px;
+      font-size: 0.98rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        padding: 5rem 2rem;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.9),
+        rgba(15, 23, 42, 0.2),
+        transparent
+      );
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #38bdf8, #0ea5e9 40%, #1d2340 75%);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+    }
+
+    .brand-name {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.96rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.15rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.18s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.55rem 1.45rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      transition: background 0.18s ease-out, transform 0.12s ease-out,
+        box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22d3ee, #6366f1);
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(79, 70, 229, 0.8);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-small {
+      padding: 0.4rem 1.05rem;
+      font-size: 0.82rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav {
+        padding-inline: 2rem;
+      }
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-main);
+      padding: 0 1.5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(129, 140, 248, 0.25), transparent 60%),
+        url("https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp");
+      background-position: center;
+      background-size: cover;
+      filter: saturate(1.2) contrast(1.05);
+      opacity: 0.9;
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 10%, #020617 80%);
+      mix-blend-mode: multiply;
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin-top: 4.5rem; /* space under nav */
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(2.3rem, 4vw + 1.5rem, 3.4rem);
+      line-height: 1.05;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(120deg, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 540px;
+      margin: 0 auto 1.6rem auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .hero-scroll-indicator {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, #38bdf8, transparent);
+    }
+
+    @media (min-width: 640px) {
+      .hero-actions {
+        flex-direction: row;
+      }
+    }
+
+    /* CARDS */
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 1.4rem 1.35rem;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.7);
+    }
+
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* COURSE + COMMUNITY SECTION */
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+      margin-top: 2.4rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .bullet-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      margin-top: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .subheading {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (min-width: 880px) {
+      .split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* TESTIMONIALS */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.3rem;
+      margin-top: 2.1rem;
+    }
+
+    .testimonial {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.24), transparent 55%),
+        var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1.3rem 1.25rem 1.15rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .testimonial-quote {
+      font-size: 0.92rem;
+    }
+
+    .testimonial-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.9rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .avatar-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #a855f7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* INSTRUCTOR */
+
+    .instructor {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+      margin-top: 2.4rem;
+      align-items: center;
+    }
+
+    .avatar-large {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.45), transparent 55%),
+        #020617;
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.0rem;
+      overflow: hidden;
+    }
+
+    .avatar-large video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: calc(var(--radius-xl) - 4px);
+    }
+
+    .instructor-name {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .instructor-body {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 0.28rem 0.7rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    @media (min-width: 880px) {
+      .instructor {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      }
+    }
+
+    /* PRICING */
+
+    .pricing-wrapper {
+      margin-top: 2.4rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .pricing-card {
+      max-width: 460px;
+      width: 100%;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.25), transparent 55%),
+        var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 2rem 1.8rem 1.8rem;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.9);
+      text-align: left;
+    }
+
+    .pricing-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .pricing-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin-top: 0.7rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .pricing-main {
+      font-size: 1.9rem;
+      font-weight: 600;
+    }
+
+    .pricing-original {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .pricing-term {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pricing-list {
+      list-style: none;
+      margin: 1rem 0 1.4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pricing-list li {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .checkmark {
+      font-size: 1rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-footnote {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.9rem;
+    }
+
+    /* SIGNUP FORM */
+
+    .signup-form {
+      margin-top: 2rem;
+      max-width: 500px;
+    }
+
+    .signup-form input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: #f9fafb;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .signup-form input:focus {
+      border-color: #38bdf8;
+      outline: none;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
+      }
+    }
+
+    /* FAQ */
+
+    .faq-list {
+      margin-top: 2rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .faq-item {
+      padding: 1.05rem 1.25rem;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-size: 0.96rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-answer {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+
+    .footer {
+      padding: 2.5rem 1.5rem 2rem;
+      background: #020617;
+      border-top: 1px solid #111827;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+      }
+      .footer {
+        padding-inline: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <div class="brand-mark"></div>
+          <div class="brand-name">MDM Trading</div>
+        </div>
+
+        <nav class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#course">Course</a>
+          <a href="#community">Community</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-cta">
+          <button
+            class="btn btn-ghost btn-small"
+            onclick="window.location.href='https://mdmtraders.com/?ref=ddx10'"
+          >
+            Log in
+          </button>
+          <button
+            class="btn btn-primary btn-small"
+            onclick="window.location.href='https://mdmtraders.com/?ref=ddx10'"
+          >
+            Join now
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-inner">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          Live cohort · Private trading community
+        </div>
+
+        <h1 class="hero-title">
+          Welcome to a <span class="hero-highlight">Better Way</span>
+          to Trade
+        </h1>
+
+        <p class="hero-subtitle">
+          Learn proven strategies, manage risk like a pro, and trade alongside a
+          focused community of forex, indices, and crypto traders.
+        </p>
+
+        <div class="hero-actions">
+          <button
+            class="btn btn-primary"
+            onclick="window.location.href='https://mdmtraders.com/?ref=ddx10'"
+          >
+            Join the Trading Community
+          </button>
+          <button
+            class="btn btn-ghost"
+            onclick="window.location.href='https://mdmtraders.com/?ref=ddx10'"
+          >
+            Watch Free Intro Lesson
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          No experience required · Step-by-step curriculum · Weekly live sessions
+        </div>
+      </div>
+
+      <a href="#how-it-works" class="hero-scroll">
+        <span>Discover more</span>
+        <span class="hero-scroll-indicator"></span>
+      </a>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">The process</div>
+        <h2 class="section-title">Master the markets in three stages</h2>
+        <p class="section-subtitle">
+          We combine world-class education, live mentorship, and a serious group of traders so you never have to figure it out alone.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">①</div>
+            <div class="card-title">Learn the playbook</div>
+            <p class="card-body">
+              Follow a structured curriculum that takes you from market basics to advanced entries, exits, and risk management.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">②</div>
+            <div class="card-title">Trade with others</div>
+            <p class="card-body">
+              Join live sessions, share setups, and review trades together in a private, distraction-free environment.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">③</div>
+            <div class="card-title">Level up weekly</div>
+            <p class="card-body">
+              Weekly calls, accountability threads, and ongoing updates keep you sharp as markets evolve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSE + COMMUNITY -->
+    <section id="course" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Inside the program</div>
+        <h2 class="section-title">Course + community built for real traders</h2>
+        <p class="section-subtitle">
+          You get lifetime access to the full curriculum and a private community designed to support you from first trade to full consistency.
+        </p>
+
+        <div class="split">
+          <div>
+            <h3 class="subheading">The trading curriculum</h3>
+            <p class="section-subtitle">
+              Bite-sized video lessons, live breakdowns, and templates you can apply to forex, indices, and crypto.
+            </p>
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Module 1 · Market structure, sessions & liquidity.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Module 2 · Entries, exits, and trade management rules.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Module 3 · Risk, sizing, and protecting your capital.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Module 4 · Psychology, discipline, and routine building.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Module 5 · Advanced playbook & scaling strategies.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div id="community">
+            <h3 class="subheading">The private trading floor</h3>
+            <p class="section-subtitle">
+              Not another noisy Discord. A focused room for traders who respect risk and show up consistently.
+            </p>
+            <ul class="bullet-list">
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Live London & NY session breakdowns each week.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Setup sharing channels for forex, indices, and crypto.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Trade review threads with honest feedback.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Beginner help channels so you never feel lost.</span>
+              </li>
+              <li>
+                <span class="bullet-dot"></span>
+                <span>Accountability check-ins and progress tracking.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="social-proof" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Proof</div>
+        <h2 class="section-title">Traders who joined us say…</h2>
+        <p class="section-subtitle">
+          Real traders, real progress. These are members who committed to the process, respected risk, and did the work.
+        </p>
+
+        <div class="testimonials-grid">
+          <div class="testimonial">
+            <p class="testimonial-quote">
+              “I finally have a clear checklist. No more chasing every candle — my risk is defined before I click buy or sell.”
+            </p>
+            <div class="testimonial-meta">
+              <div class="avatar-circle">AM</div>
+              <div>Adam M · Indices swing trader</div>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <p class="testimonial-quote">
+              “The community is the difference. Seeing other traders execute the plan calmly changed the way I trade.”
+            </p>
+            <div class="testimonial-meta">
+              <div class="avatar-circle">SK</div>
+              <div>Sara K · FX day trader</div>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <p class="testimonial-quote">
+              “Weekly calls keep me accountable. I know exactly what to journal and review each week.”
+            </p>
+            <div class="testimonial-meta">
+              <div class="avatar-circle">JD</div>
+              <div>James D · Crypto & FX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUCTOR -->
+    <section id="instructor" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Your mentor</div>
+        <h2 class="section-title">Learn from a trader who actually trades</h2>
+        <p class="section-subtitle">
+          MDM Trading is led by an active full-time trader who built a rule-based approach after years of trial, error, and blown accounts.
+        </p>
+
+        <div class="instructor">
+          <div class="avatar-large">
+            <video
+              src="https://aazofjsssobejhkyyiqv.supabase.co/storage/v1/object/public/documents/In%20my%20zone.%20In%20my%20space.%20Working.%20Grinding.%20Focused.%20No%20hype,%20just%20hustle...Recording%20the%20journe.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </div>
+          <div>
+            <div class="instructor-name">Chris Bredell</div>
+            <div class="tagline">Full-time trader · Mentor · Risk-first approach</div>
+            <p class="instructor-body">
+              For years I bounced between strategies, signals, and indicators. Things changed when
+              I committed to a simple, rule-based system and strict risk management. This program
+              is built to give you that same clarity — without the years of confusion.
+            </p>
+            <p class="instructor-body">
+              I actively trade forex, indices, and crypto, and everything you’ll learn here is what
+              I use in live markets — from pre-session routines to journaling and review.
+            </p>
+
+            <div class="stat-pills">
+              <div class="stat-pill">8+ years market experience</div>
+              <div class="stat-pill">Hundreds of students coached</div>
+              <div class="stat-pill">Focus: FX · Indices · Crypto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Join us</div>
+        <h2 class="section-title">Choose your access</h2>
+        <p class="section-subtitle">
+          One simple membership that gives you everything: the course, the community,
+          and the live calls.
+        </p>
+
+        <div class="pricing-wrapper">
+          <div class="pricing-card">
+            <div class="pricing-label">Founding cohort offer</div>
+            <div class="pricing-title">Full Course + Community Access</div>
+
+            <div class="pricing-price">
+              <div class="pricing-main">$0</div>
+              <div class="pricing-original">$497</div>
+              <div class="pricing-term">one-time · limited free access</div>
+            </div>
+
+            <p class="section-subtitle">
+              Lock in free lifetime access to all content, updates, and the private trading floor
+              while this launch offer is active.
+            </p>
+
+            <ul class="pricing-list">
+              <li>
+                <span class="checkmark">✔</span>
+                <span>Complete trading curriculum with step-by-step modules.</span>
+              </li>
+              <li>
+                <span class="checkmark">✔</span>
+                <span>Private Discord/Slack community with serious traders only.</span>
+              </li>
+              <li>
+                <span class="checkmark">✔</span>
+                <span>Weekly live calls for market prep and trade reviews.</span>
+              </li>
+              <li>
+                <span class="checkmark">✔</span>
+                <span>Strategy checklists, trading journal templates, & routines.</span>
+              </li>
+              <li>
+                <span class="checkmark">✔</span>
+                <span>Lifetime updates as the playbook evolves.</span>
+              </li>
+            </ul>
+
+            <button
+              class="btn btn-primary"
+              style="width: 100%; margin-top: 0.2rem;"
+              onclick="window.location.href='https://mdmtraders.com/?ref=ddx10'"
+            >
+              Get Instant Free Access
+            </button>
+
+            <div class="pricing-footnote">
+              This free launch price may be removed at any time. Once you’re in, you keep access
+              even if the price increases for new members.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNUP FORM -->
+    <section id="signup" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Start free</div>
+        <h2 class="section-title">Join MDM Trading free today</h2>
+        <p class="section-subtitle">
+          Drop your details below and we’ll reach out on WhatsApp with your next steps.
+        </p>
+
+        <form class="signup-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <input type="text" id="firstName" placeholder="First Name" required />
+            <input type="text" id="lastName" placeholder="Last Name" required />
+          </div>
+
+          <input type="tel" id="whatsapp" placeholder="WhatsApp Number" required />
+
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">
+            Get Free Access
+          </button>
+        </form>
+
+        <p id="successMessage" style="display:none; margin-top:1rem; color:#22c55e;">
+          Thank you! We’ve got your details and will contact you via WhatsApp shortly. 🎉
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="section-inner">
+        <div class="section-eyebrow">Questions</div>
+        <h2 class="section-title">Frequently asked</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Do I need previous trading experience?</div>
+            <div class="faq-answer">
+              No. The curriculum starts with foundations and builds up. If you already trade, you
+              can move faster and focus on refining your system.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">Which markets does this work for?</div>
+            <div class="faq-answer">
+              The concepts apply to forex, indices, and major crypto pairs. We focus on clean price
+              action and risk management that works across markets.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">How long do I have access?</div>
+            <div class="faq-answer">
+              You get lifetime access to the course, community, and all future updates as long as
+              the program exists.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">What if I can’t join the live calls?</div>
+            <div class="faq-answer">
+              All calls are recorded and uploaded with timestamps so you can catch up in your own time.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">Is this financial advice?</div>
+            <div class="faq-answer">
+              No. The program is for education only. You’re fully responsible for your own trading
+              decisions and results.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <div class="brand-name" style="margin-bottom: 0.4rem;">MDM Trading</div>
+          <div class="footer-links">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Risk disclosure</a>
+            <a href="#">Contact</a>
+          </div>
+          <div style="margin-top: 0.7rem;">© <span id="year"></span> MDM Trading. All rights reserved.</div>
+        </div>
+
+        <div class="footer-disclaimer">
+          Trading foreign exchange, indices, cryptocurrencies and other leveraged products carries a
+          high level of risk and may not be suitable for all investors. You could lose more than your
+          initial investment. The content provided by MDM Trading is for educational purposes
+          only and does not constitute financial advice or a solicitation to trade. Past performance is
+          not indicative of future results. Always do your own research and trade responsibly.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple front-end handler for form (no backend yet)
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const first = document.getElementById("firstName").value.trim();
+      const last = document.getElementById("lastName").value.trim();
+      const wa = document.getElementById("whatsapp").value.trim();
+
+      // Here you can later send this to your backend / Google Sheets / WhatsApp API
+      console.log("Collected:", { first, last, wa });
+
+      document.getElementById("successMessage").style.display = "block";
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
